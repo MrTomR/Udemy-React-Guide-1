@@ -1,3 +1,26 @@
 .App {
   text-align: center;
 }
+
+.f-red {
+  color: red; 
+}
+
+.bold {
+  font-weight: bold; 
+}
+
+.button {
+  background-color: green;
+  font: inherit;
+  border: 1px solid black;
+  padding: 8px; 
+  cursor: pointer;
+  color: white; 
+  
+}
+
+.button:hover {
+  background-color: lightgreen; 
+  color: black;
+}

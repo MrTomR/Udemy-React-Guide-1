@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
+// import Radium, {StyleRoot} from 'radium';
+//Radium examples commented out so we can have a play with styled-components
+// import styled from 'styled-components';
+// Styled components coming out.
 import './App.css';
 import Person from './Person/Person';
 import UserInput from './AssOneSyntax/UserInput';
 import UserOutput from './AssOneSyntax/UserOutput';
 
+// const StyledButton = styled.button`
+//   background-color: ${props => props.alt ? 'red' : 'green'};
+//   font: inherit;
+//   border: 1px solid black;
+//   padding: 8px; 
+//   cursor: pointer;
+//   color: white; 
+  
+//   &:hover {
+//     background-color: ${props => props.alt ? 'coral' : 'lightgreen'}; 
+//     color: black;
+//   }
+// `;
+
 const app = props => {
   const [ personsState, setPersonsState] = useState({
     persons: [
        {id: 'asgjsfd', name: 'Tom', age: 26}, 
-       {id: 'kuafg', name: 'Ashley', age: 25},
-       {id: 'kiuadfkj', name: 'Megan', age: 31}
+       {id: 'kuafg', name: 'Person 2', age: 25},
+       {id: 'kiuadfkj', name: 'Person 3', age: 31}
     ]
   });
 
@@ -61,13 +79,18 @@ const app = props => {
     });
   }
   
-  const style = {
-    backgroundColor: 'white',
-    font: 'inherit',
-    border: '1px solid blue',
-    padding: '8px', 
-    cursor: 'pointer'
-  };
+  // const style = {
+  //   backgroundColor: 'green',
+  //   font: 'inherit',
+  //   border: '1px solid black',
+  //   padding: '8px', 
+  //   cursor: 'pointer',
+  //   color: 'white', 
+  //   ':hover': {
+  //     backgroundColor: 'lightgreen', 
+  //     color: 'black'
+  //   }
+  // };
 
   let personsCond = null; 
 
@@ -88,28 +111,54 @@ const app = props => {
         
       </div> 
     )
+
+    // style.backgroundColor = 'red'; 
+  //   style[':hover'] = {
+  //     backgroundColor: 'coral', 
+  //     color: 'black'
+  //   }; 
+  //Radium examples commented out so we can have a play with styled-components
+  }
+
+  const classes = [];
+
+  if(personsState.persons.length <= 2) {
+    classes.push('f-red');
+  }
+
+  if(personsState.persons.length <= 1) {
+    classes.push('bold'); 
   }
 
   return (
-    <div className="App">
-        <h1 className="App-title">Hi, I'm a React App</h1>
-        <p>This is a paragraph</p>
-        <button 
-          style={style} 
-          onClick={() => togglePersonsHandler()}>Switch Name</button>  
+    // <StyleRoot>
+    //Radium examples commented out so we can have a play with styled-components
+      <div className="App">
+          <h1 className="App-title">Hi, I'm a React App</h1>
+          <p className={classes.join(' ')}>Wow dynamic style updating based on number of persons</p>
+          
+          <button className="button"
+            onClick={() => togglePersonsHandler()}>Toggle persons 
+          </button>
 
-        {personsCond}       
+          {/* <StyledButton
+            alt={showPersonsState.showPersons}
+            onClick={() => togglePersonsHandler()}>Toggle persons 
+          </StyledButton> */}
+          {/* Styled-components coming out */}
 
-        <UserInput changed={inputChangedHandler.bind(this)} currentName={assState.username[0].name}></UserInput>
-        <UserOutput userName={assState.username[0].name}></UserOutput>
-        <UserOutput userName={assState.username[1].name}></UserOutput>
-        <UserOutput userName={assState.username[2].name}></UserOutput>
-    </div>
+          {personsCond}       
+
+          <UserInput changed={inputChangedHandler.bind(this)} currentName={assState.username[0].name}></UserInput>
+          <UserOutput userName={assState.username[0].name}></UserOutput>
+          <UserOutput userName={assState.username[1].name}></UserOutput>
+          <UserOutput userName={assState.username[2].name}></UserOutput>
+      </div>
+    // </StyleRoot>
+    //Radium examples commented out so we can have a play with styled-components
     ); 
 }; 
  
-
-
-
-
+// export default Radium(app);
+//Radium examples commented out so we can have a play with styled-components
 export default app;
