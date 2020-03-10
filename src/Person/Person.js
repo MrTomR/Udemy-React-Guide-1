@@ -2,7 +2,7 @@ import React from 'react';
 // import Radium from 'radium'; 
 //Radium examples commented out so we can have a play with styled-components
 // import styled from 'styled-components'; 
-import './Person.css'; 
+import classes from './Person.css'; 
 
 // const StyledDiv = styled.div`
 //                     width: 60%; 
@@ -34,7 +34,7 @@ const Person = (props) => {
     // }
     return (        
         // <StyledDiv>
-        <div className="Person"> 
+        <div className={classes.Person}> 
             <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
             <p>{props.children}</p>
             <input onChange={props.changed} type="text" value={props.name} />

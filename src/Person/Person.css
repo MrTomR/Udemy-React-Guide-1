@@ -5,14 +5,14 @@
     box-shadow: 0 2px 3px #ccc; 
     padding: 16px; 
     text-align: center; 
-    
+    background-color: blue; 
+    color: white; 
 }
 
-
-/* 
+ 
 @media screen and (min-width: 500px) {
     .Person {
         background-color: white;
         color: black;
     }
-} */
+} 

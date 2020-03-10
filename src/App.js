@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 //Radium examples commented out so we can have a play with styled-components
 // import styled from 'styled-components';
 // Styled components coming out.
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 import UserInput from './AssOneSyntax/UserInput';
 import UserOutput from './AssOneSyntax/UserOutput';
@@ -93,6 +93,7 @@ const app = props => {
   // };
 
   let personsCond = null; 
+  let btnClass = [classes.Button];
 
   if(showPersonsState.showPersons) {
     personsCond = (
@@ -112,6 +113,8 @@ const app = props => {
       </div> 
     )
 
+    btnClass.push(classes.Red); 
+    
     // style.backgroundColor = 'red'; 
   //   style[':hover'] = {
   //     backgroundColor: 'coral', 
@@ -120,24 +123,24 @@ const app = props => {
   //Radium examples commented out so we can have a play with styled-components
   }
 
-  const classes = [];
+  const assigned = [];
 
   if(personsState.persons.length <= 2) {
-    classes.push('f-red');
+    assigned.push(classes.f_red);
   }
 
   if(personsState.persons.length <= 1) {
-    classes.push('bold'); 
+    assigned.push(classes.bold); 
   }
 
   return (
     // <StyleRoot>
     //Radium examples commented out so we can have a play with styled-components
-      <div className="App">
+    <div className={classes.App}>
           <h1 className="App-title">Hi, I'm a React App</h1>
-          <p className={classes.join(' ')}>Wow dynamic style updating based on number of persons</p>
+          <p className={assigned.join(' ')}>Wow dynamic style updating based on number of persons</p>
           
-          <button className="button"
+          <button className={btnClass.join(' ')}
             onClick={() => togglePersonsHandler()}>Toggle persons 
           </button>
 
