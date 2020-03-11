@@ -32,7 +32,8 @@ const Person = (props) => {
         // }
         //Radium examples commented out so we can have a play with styled-components
     // }
-    return (        
+
+    return (       
         // <StyledDiv>
         <div className={classes.Person}> 
             <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>

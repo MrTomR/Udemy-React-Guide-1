@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 // Styled components coming out.
 import classes from './App.css';
 import Person from './Person/Person';
+// import ErrorBoundary from './ErrorBoundary/ErrorBoundary'; 
 import UserInput from './AssOneSyntax/UserInput';
 import UserOutput from './AssOneSyntax/UserOutput';
 
@@ -103,7 +104,7 @@ const app = props => {
                       click={() => deletePersonsHandler(index) }
                       name={person.name} 
                       age={person.age}
-                      key={person.id}
+                      key={person.id}                      
                       changed={(event) => nameChangedHandler(event, person.id)}
                       >
                         Something here
