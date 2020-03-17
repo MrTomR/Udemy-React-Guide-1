@@ -131,7 +131,7 @@ const app = props => {
             <Cockpit 
               title={props.appTitle}
               showPersons={showPersonsState.showPersons} 
-              persons={personsState.persons} 
+              personsLength={personsState.persons.length} 
               clicked={togglePersonsHandler}
             /> : null }
 

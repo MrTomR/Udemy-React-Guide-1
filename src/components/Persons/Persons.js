@@ -14,12 +14,24 @@ class Persons extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('[Persons.js] shouldComponentUpdate');
-    if(nextProps.persons !== this.props.persons) {
+    if(
+      nextProps.persons !== this.props.persons ||
+      nextProps.changed !== this.props.changed ||
+      nextProps.clicked !== this.props.clicked
+    ) {
       return true; 
     } else {
       return false; 
     }
   }
+
+  //Parent components updating information and passing to a child - 
+  //This will always cause a re-render of the child with the new information
+  //So shouldComponentUpdate being used in this scenario wouldnt be good
+  //Because you are executing an unnecessary additional function. 
+  //If you are in sibling components that do not need to pass information to one another
+  // (Think This file and Cockpit.js) its a great check to run because you dont want this file
+  // to rerender when information that affects the Cockpit changes
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('[Persons.js] getSnapshotBeforeUpdate'); 
