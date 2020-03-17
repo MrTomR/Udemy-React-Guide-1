@@ -4,10 +4,12 @@ import React, { useState } from 'react';
 // import styled from 'styled-components';
 // Styled components coming out.
 import classes from './App.css';
-import Person from './Person/Person';
+// import Person from '../components/Persons/Person/Person';
 // import ErrorBoundary from './ErrorBoundary/ErrorBoundary'; 
-import UserInput from './AssOneSyntax/UserInput';
-import UserOutput from './AssOneSyntax/UserOutput';
+import UserInput from '../components/AssOneSyntax/UserInput';
+import UserOutput from '../components/AssOneSyntax/UserOutput';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 // const StyledButton = styled.button`
 //   background-color: ${props => props.alt ? 'red' : 'green'};
@@ -33,6 +35,7 @@ const app = props => {
   });
 
   const [showPersonsState, setshowPersonsState] = useState({showPersons: false}); 
+  const [cockpitState, setCockpitState] = useState({showCockpit: true});
   
   const [assState, setAssState] = useState({
     username: [
@@ -53,6 +56,11 @@ const app = props => {
       const doesShow = showPersonsState.showPersons;
       setshowPersonsState({showPersons: !doesShow}); 
   }
+
+  const toggleCockpitHandler = () => {
+    const doesCockpitShow = cockpitState.showCockpit;
+    setCockpitState({showCockpit: !doesCockpitShow}); 
+}
 
   const nameChangedHandler = (event, id) => {
     const personIndex = personsState.persons.findIndex(p => {
@@ -94,27 +102,17 @@ const app = props => {
   // };
 
   let personsCond = null; 
-  let btnClass = [classes.Button];
 
-  if(showPersonsState.showPersons) {
+  if(showPersonsState.showPersons && cockpitState.showCockpit) {
     personsCond = (
       <div>
-        {personsState.persons.map((person, index) => {
-            return <Person 
-                      click={() => deletePersonsHandler(index) }
-                      name={person.name} 
-                      age={person.age}
-                      key={person.id}                      
-                      changed={(event) => nameChangedHandler(event, person.id)}
-                      >
-                        Something here
-                    </Person>
-        }) }
-        
+        <Persons 
+          persons = {personsState.persons}
+          clicked={deletePersonsHandler}
+          changed={nameChangedHandler}
+        />        
       </div> 
     )
-
-    btnClass.push(classes.Red); 
     
     // style.backgroundColor = 'red'; 
   //   style[':hover'] = {
@@ -124,26 +122,19 @@ const app = props => {
   //Radium examples commented out so we can have a play with styled-components
   }
 
-  const assigned = [];
-
-  if(personsState.persons.length <= 2) {
-    assigned.push(classes.f_red);
-  }
-
-  if(personsState.persons.length <= 1) {
-    assigned.push(classes.bold); 
-  }
-
   return (
     // <StyleRoot>
     //Radium examples commented out so we can have a play with styled-components
     <div className={classes.App}>
-          <h1 className="App-title">Hi, I'm a React App</h1>
-          <p className={assigned.join(' ')}>Wow dynamic style updating based on number of persons</p>
-          
-          <button className={btnClass.join(' ')}
-            onClick={() => togglePersonsHandler()}>Toggle persons 
-          </button>
+          <button onClick={toggleCockpitHandler}>Remove Cockpit</button>
+          {cockpitState.showCockpit ?
+            <Cockpit 
+              title={props.appTitle}
+              showPersons={showPersonsState.showPersons} 
+              persons={personsState.persons} 
+              clicked={togglePersonsHandler}
+            /> : null }
+
 
           {/* <StyledButton
             alt={showPersonsState.showPersons}

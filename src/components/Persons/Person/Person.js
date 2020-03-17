@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 // import Radium from 'radium'; 
 //Radium examples commented out so we can have a play with styled-components
 // import styled from 'styled-components'; 
@@ -22,7 +22,17 @@ import classes from './Person.css';
 // This becomes a callable component in itself without being (props) => because we are pulling in the styled-components library 
 // Normally defining in this manner and calling <StyledDiv> as a component wouldnt work.
 
-const Person = (props) => {
+class Person extends Component {
+    render() {
+        console.log('[Person.js] rendering...'); 
+        return(
+            <div className={classes.Person}> 
+                <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
+                <p>{this.props.children}</p>
+                <input onChange={this.props.changed} type="text" value={this.props.name} />
+            </div>
+        )
+    }
     // const style = {
         // backgroundColor: 'blue', 
         // color: "white"
@@ -33,15 +43,15 @@ const Person = (props) => {
         //Radium examples commented out so we can have a play with styled-components
     // }
 
-    return (       
+    // return (       
         // <StyledDiv>
-        <div className={classes.Person}> 
-            <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
-            <p>{props.children}</p>
-            <input onChange={props.changed} type="text" value={props.name} />
-        </div>
+        // <div className={classes.Person}> 
+        //     <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
+        //     <p>{props.children}</p>
+        //     <input onChange={props.changed} type="text" value={props.name} />
+        // </div>
         /* </StyledDiv> */
-    )
+    // )
 };
 
 // export default Radium(Person); 
