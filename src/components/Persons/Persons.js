@@ -1,7 +1,7 @@
-import React, { Component } from 'react'; 
+import React, { PureComponent } from 'react'; 
 import Person from './Person/Person';
 
-class Persons extends Component {
+class Persons extends PureComponent {
   // static getDerivedStateFromProps(props, state) {
   //   console.log('[Persons.js] getDerivedStateFromProps');
   //   return state; 
@@ -12,18 +12,18 @@ class Persons extends Component {
   // }
   //Doesnt work anymore, removed from React. componentWillUpdate is another in this boat.
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[Persons.js] shouldComponentUpdate');
-    if(
-      nextProps.persons !== this.props.persons ||
-      nextProps.changed !== this.props.changed ||
-      nextProps.clicked !== this.props.clicked
-    ) {
-      return true; 
-    } else {
-      return false; 
-    }
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[Persons.js] shouldComponentUpdate');
+  //   if(
+  //     nextProps.persons !== this.props.persons ||
+  //     nextProps.changed !== this.props.changed ||
+  //     nextProps.clicked !== this.props.clicked
+  //   ) {
+  //     return true; 
+  //   } else {
+  //     return false; 
+  //   }
+  // }
 
   //Parent components updating information and passing to a child - 
   //This will always cause a re-render of the child with the new information

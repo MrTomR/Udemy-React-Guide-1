@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 // import Radium from 'radium'; 
 //Radium examples commented out so we can have a play with styled-components
 // import styled from 'styled-components'; 
-import classes from './Person.css'; 
+// import Aux from '../../../hoc/Aux'; 
+// import classes from './Person.css'; 
 
 // const StyledDiv = styled.div`
 //                     width: 60%; 
@@ -26,11 +27,12 @@ class Person extends Component {
     render() {
         console.log('[Person.js] rendering...'); 
         return(
-            <div className={classes.Person}> 
+            <React.Fragment>
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
                 <input onChange={this.props.changed} type="text" value={this.props.name} />
-            </div>
+            </React.Fragment>
+            //Aux higher order component allows you to output adjacent content in a component
         )
     }
     // const style = {

@@ -10,6 +10,8 @@ import UserInput from '../components/AssOneSyntax/UserInput';
 import UserOutput from '../components/AssOneSyntax/UserOutput';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import withClass from '../hoc/WithClass'; 
+import Aux from '../hoc/Aux'; 
 
 // const StyledButton = styled.button`
 //   background-color: ${props => props.alt ? 'red' : 'green'};
@@ -124,8 +126,9 @@ const app = props => {
 
   return (
     // <StyleRoot>
+    //classes={classes.App}
     //Radium examples commented out so we can have a play with styled-components
-    <div className={classes.App}>
+    <Aux>
           <button onClick={toggleCockpitHandler}>Remove Cockpit</button>
           {cockpitState.showCockpit ?
             <Cockpit 
@@ -148,7 +151,7 @@ const app = props => {
           <UserOutput userName={assState.username[0].name}></UserOutput>
           <UserOutput userName={assState.username[1].name}></UserOutput>
           <UserOutput userName={assState.username[2].name}></UserOutput>
-      </div>
+      </Aux>
     // </StyleRoot>
     //Radium examples commented out so we can have a play with styled-components
     ); 
@@ -156,4 +159,4 @@ const app = props => {
  
 // export default Radium(app);
 //Radium examples commented out so we can have a play with styled-components
-export default app;
+export default withClass(app, classes.App);
