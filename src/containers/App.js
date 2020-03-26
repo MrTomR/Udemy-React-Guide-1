@@ -10,8 +10,9 @@ import UserInput from '../components/AssOneSyntax/UserInput';
 import UserOutput from '../components/AssOneSyntax/UserOutput';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import withClass from '../hoc/WithClass'; 
+import withClass from '../hoc/WithClass';
 import Aux from '../hoc/Aux'; 
+import AuthContext from '../context/auth-context';
 
 // const StyledButton = styled.button`
 //   background-color: ${props => props.alt ? 'red' : 'green'};
@@ -38,6 +39,7 @@ const app = props => {
 
   const [showPersonsState, setshowPersonsState] = useState({showPersons: false}); 
   const [cockpitState, setCockpitState] = useState({showCockpit: true});
+  const [authState, setAuthState] = useState({isauthenticated: false}); 
   
   const [assState, setAssState] = useState({
     username: [
@@ -58,11 +60,15 @@ const app = props => {
       const doesShow = showPersonsState.showPersons;
       setshowPersonsState({showPersons: !doesShow}); 
   }
+  const loginHandler = () => {
+    const authStateCopy = authState.isauthenticated;
+    setAuthState({isauthenticated: !authStateCopy}); 
+  }
 
   const toggleCockpitHandler = () => {
     const doesCockpitShow = cockpitState.showCockpit;
     setCockpitState({showCockpit: !doesCockpitShow}); 
-}
+  }
 
   const nameChangedHandler = (event, id) => {
     const personIndex = personsState.persons.findIndex(p => {
@@ -130,22 +136,25 @@ const app = props => {
     //Radium examples commented out so we can have a play with styled-components
     <Aux>
           <button onClick={toggleCockpitHandler}>Remove Cockpit</button>
-          {cockpitState.showCockpit ?
-            <Cockpit 
-              title={props.appTitle}
-              showPersons={showPersonsState.showPersons} 
-              personsLength={personsState.persons.length} 
-              clicked={togglePersonsHandler}
-            /> : null }
+          
+          <AuthContext.Provider value={{authenticated: authState.isauthenticated, login: loginHandler}}>
+            {cockpitState.showCockpit ?
+              <Cockpit 
+                title={props.appTitle}
+                showPersons={showPersonsState.showPersons} 
+                personsLength={personsState.persons.length} 
+                clicked={togglePersonsHandler}
+              /> : null }
+
+              {personsCond}   
+          </AuthContext.Provider>
 
 
           {/* <StyledButton
             alt={showPersonsState.showPersons}
             onClick={() => togglePersonsHandler()}>Toggle persons 
           </StyledButton> */}
-          {/* Styled-components coming out */}
-
-          {personsCond}       
+          {/* Styled-components coming out */}              
 
           <UserInput changed={inputChangedHandler.bind(this)} currentName={assState.username[0].name}></UserInput>
           <UserOutput userName={assState.username[0].name}></UserOutput>

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'; 
 // import Radium from 'radium'; 
 //Radium examples commented out so we can have a play with styled-components
 // import styled from 'styled-components'; 
 // import Aux from '../../../hoc/Aux'; 
-// import classes from './Person.css'; 
+import withClass from '../../../hoc/WithClass';
+import classes from './Person.css'; 
+import AuthContext from '../../../context/auth-context';
 
 // const StyledDiv = styled.div`
 //                     width: 60%; 
@@ -24,13 +27,34 @@ import React, { Component } from 'react';
 // Normally defining in this manner and calling <StyledDiv> as a component wouldnt work.
 
 class Person extends Component {
+    constructor(props) {
+        super(props);
+        this.inputElementRef = React.createRef();
+    }
+
+    componentDidMount() {
+        // this.inputElement.focus();
+        this.inputElementRef.current.focus(); 
+    }
+
     render() {
         console.log('[Person.js] rendering...'); 
         return(
             <React.Fragment>
+                <AuthContext.Consumer>
+                    {
+                        context => context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>                        
+                    }
+                </AuthContext.Consumer>   
+                
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
-                <input onChange={this.props.changed} type="text" value={this.props.name} />
+                <input 
+                    onChange={this.props.changed} 
+                    type="text" 
+                    value={this.props.name} 
+                    ref={this.inputElementRef}
+                />
             </React.Fragment>
             //Aux higher order component allows you to output adjacent content in a component
         )
@@ -59,4 +83,11 @@ class Person extends Component {
 // export default Radium(Person); 
 //Radium examples commented out so we can have a play with styled-components
 
-export default Person; 
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string, 
+    age: PropTypes.number,
+    changed: PropTypes.func
+}; 
+
+export default withClass(Person, classes.Person); 
